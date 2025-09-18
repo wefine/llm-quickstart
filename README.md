@@ -111,6 +111,48 @@ conda activate peft
 pip install -r requirements.txt
 ```
 
+如果使用 `uv` 进行依赖管理，可以使用：
+
+```shell
+uv sync
+```
+
+### 常见问题解决
+
+#### TqdmWarning 问题修复
+
+如果在运行 Jupyter Notebook 时遇到以下警告：
+
+```
+TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. 
+See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+```
+
+**解决方案**：
+
+1. **使用 pip 安装**：
+   ```shell
+   pip install ipywidgets>=8.0.0 tqdm>=4.64.0
+   ```
+
+2. **使用 uv 安装**（推荐）：
+   ```shell
+   uv add ipywidgets tqdm
+   ```
+
+3. **启用 Jupyter 扩展**：
+   ```shell
+   jupyter nbextension enable --py widgetsnbextension --sys-prefix
+   ```
+
+**问题原因**：
+- `tqdm` 包在 Jupyter 环境中需要 `ipywidgets` 来显示交互式进度条
+- 没有 `ipywidgets` 时，tqdm 会回退到文本模式并显示警告
+- 安装 `ipywidgets` 后，进度条会以更美观的交互式形式显示
+
+修复后重启 Jupyter Notebook/Lab 即可正常使用。
+
 
 ### 安装和配置 Jupyter Lab
 

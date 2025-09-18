@@ -168,3 +168,6 @@ deepspeed/output_dir
 RLHF
 
 .idea
+
+uv.lock
+.DS_Store
